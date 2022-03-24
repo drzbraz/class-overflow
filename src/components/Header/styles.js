@@ -9,7 +9,13 @@ export const Container = styled.div`
   z-index: 5050;
   background-color: hsl(180deg 7% 97%);
   height: 50px;
-  font-family: Montserrat;
-  box-sizing: border-box;
-  border-top: solid 2px black;
+  box-shadow: 0px 1px 24px 0px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const Text = styled.h3`
+  font-size: 20px;
+  padding: 0px 5px;
+  cursor: pointer;
 `
