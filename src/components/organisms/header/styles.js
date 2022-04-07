@@ -16,6 +16,6 @@ export const Container = styled.div`
 `
 export const Text = styled.h3`
   font-size: 20px;
-  padding: 0px 5px;
+  padding: 0px 32px;
   cursor: pointer;
 `
