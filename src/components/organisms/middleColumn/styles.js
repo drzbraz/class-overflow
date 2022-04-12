@@ -14,3 +14,7 @@ export const FeedPost = styled.div`
   margin: 80px 40px 40px 40px;
   background-color: white;
 `
+
+export const Content = styled.p`
+  font-size: 24px;
+`
