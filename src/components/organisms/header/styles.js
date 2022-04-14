@@ -19,3 +19,17 @@ export const Text = styled.h3`
   padding: 0px 32px;
   cursor: pointer;
 `
+export const Avatar = styled.div`
+  width: 32px;
+  height: 32px;
+  background-color: #9b8282;
+  border-radius: 24px;
+  position: absolute;
+  right: 30px;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
