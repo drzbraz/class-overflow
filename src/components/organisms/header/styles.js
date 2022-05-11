@@ -19,10 +19,9 @@ export const Text = styled.h3`
   padding: 0px 32px;
   cursor: pointer;
 `
-export const Avatar = styled.div`
+export const Icone = styled.div`
   width: 32px;
   height: 32px;
-  background-color: #9b8282;
   border-radius: 24px;
   position: absolute;
   right: 30px;
