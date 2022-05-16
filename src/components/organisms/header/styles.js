@@ -7,7 +7,7 @@ export const Container = styled.div`
   left: 0;
   width: 100%;
   z-index: 5050;
-  background-color: hsl(180deg 7% 97%);
+  background-color: hsl(0deg 0% 22%);
   height: 50px;
   box-shadow: 0px 1px 24px 0px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -18,6 +18,7 @@ export const Text = styled.h3`
   font-size: 20px;
   padding: 0px 32px;
   cursor: pointer;
+  color: white;
 `
 export const Avatar = styled.div`
   width: 32px;

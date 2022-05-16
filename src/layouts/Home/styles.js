@@ -7,6 +7,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background-color: var(--dark-background);
+  overflow: scroll;
 `
 
 export const Content = styled.div`
