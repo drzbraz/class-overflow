@@ -8,7 +8,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   background-color: var(--dark-background);
-  overflow: scroll;
+  overflow: auto;
 `
 
 export const Content = styled.div`

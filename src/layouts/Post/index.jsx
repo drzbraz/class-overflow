@@ -8,9 +8,8 @@ import { getPostsByID } from '../../infra/api'
 export default function HomeLayout() {
   const [post, setPost] = useState({})
   useEffect(async () => {
-    const post = await getPostsByID()
+    const post = await getPostsByID(window.location.pathname)
     setPost(post)
-    console.log('test')
   }, [])
   return (
     <Styles.Container>

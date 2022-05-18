@@ -22,6 +22,9 @@ export const RightColumn = styled.div`
   width: 100%;
   height: auto;
   color: hsl(206deg 100% 60%);
+  h3 {
+    color: hsl(210deg 11% 89%);
+  }
 `
 export const Badges = styled.div`
   display: flex;
@@ -50,8 +53,10 @@ export const Badge = styled.div`
   font-size: 0.9rem;
 `
 export const Content = styled.div`
-  height: 600px;
-  width: 100%;
+  padding: 20px 0px;
+  height: 700px;
+  width: 99%;
+  margin-top: 60px;
 `
 
 export const Post = styled.div`

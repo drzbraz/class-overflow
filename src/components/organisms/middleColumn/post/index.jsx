@@ -8,36 +8,39 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 export default function Post({ post }) {
   return (
     <Styles.Container>
-      <Styles.PublishPost>
-        <Input
-          color="primary"
-          placeholder="Criar um novo post"
-          type="text"
-          style={{ color: '#d7dadc', width: '100%', height: '38px' }}
-        />
+      {post && (
+        <>
+          <Styles.PublishPost>
+            <Input
+              color="primary"
+              placeholder="Criar um novo post"
+              type="text"
+              style={{ color: '#d7dadc', width: '100%', height: '38px' }}
+            />
 
-        <Button variant="contained" style={{ marginLeft: '24px' }}>
-          Publicar
-        </Button>
-      </Styles.PublishPost>
-      <Styles.Content>
-        <Styles.Post>
-          <Styles.LeftColumn>
-            <ArrowDropUpIcon style={{ width: '100%', height: '70px', cursor: 'pointer' }} />
-            {post.likes}
-            <ArrowDropDownIcon style={{ width: '100%', height: '70px', cursor: 'pointer' }} />
-          </Styles.LeftColumn>
-          <Styles.RightColumn>
-            <Styles.Title>
-              <a href={`/post/${post.id}`}>{post.title}</a>
-            </Styles.Title>
-            <Styles.Text>{post.text}</Styles.Text>
-            <Styles.Badges>
-              {!!post.topics && post.topics.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
-            </Styles.Badges>
-          </Styles.RightColumn>
-        </Styles.Post>
-      </Styles.Content>
+            <Button variant="contained" style={{ marginLeft: '24px' }}>
+              Publicar
+            </Button>
+          </Styles.PublishPost>
+          <Styles.Content>
+            <Styles.Post>
+              <Styles.LeftColumn>
+                <ArrowDropUpIcon style={{ width: '100%', height: '70px', cursor: 'pointer' }} />
+                {post.like && post.like.length}
+                <ArrowDropDownIcon style={{ width: '100%', height: '70px', cursor: 'pointer' }} />
+              </Styles.LeftColumn>
+              <Styles.RightColumn>
+                <Styles.Title>{post.title}</Styles.Title>
+                <Styles.Text>{post.content}</Styles.Text>
+                <Styles.Badges>
+                  {!!post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
+                </Styles.Badges>
+                <h3>{post.owner}</h3>
+              </Styles.RightColumn>
+            </Styles.Post>
+          </Styles.Content>
+        </>
+      )}
     </Styles.Container>
   )
 }

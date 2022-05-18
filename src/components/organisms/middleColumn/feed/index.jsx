@@ -24,21 +24,23 @@ export default function Feed({ posts }) {
       </Styles.PublishPost>
       <Styles.Gap></Styles.Gap>
       <Styles.Content>
-        {!!posts.length &&
+        {!!posts &&
+          posts.length &&
           posts.map((post) => (
-            <Styles.FeedPost key={post.id}>
+            <Styles.FeedPost key={post._id}>
               <Styles.LeftColumn>
-                {post.likes} likes <br /> {post.comments} comments
+                {post.like.length} likes <br /> {post.comments.length} comments
               </Styles.LeftColumn>
               <Styles.RightColumn>
                 <Styles.Title>
-                  <a href={`/post/${post.id}`}>{post.title}</a>
+                  <a href={`/post/${post._id}`}>{post.title}</a>
                 </Styles.Title>
                 <Styles.Badges>
-                  {post.topics.map((topic, index) => (
+                  {post.topic.map((topic, index) => (
                     <Styles.Badge key={index}>{topic}</Styles.Badge>
                   ))}
                 </Styles.Badges>
+                <h3>{post.owner}</h3>
               </Styles.RightColumn>
             </Styles.FeedPost>
           ))}

@@ -22,6 +22,9 @@ export const RightColumn = styled.div`
   width: 100%;
   height: auto;
   color: hsl(206deg 100% 60%);
+  h3 {
+    color: hsl(210deg 11% 89%);
+  }
 `
 export const Gap = styled.div`
   height: 10ṕx;
@@ -55,7 +58,7 @@ export const Content = styled.div`
 export const FeedPost = styled.div`
   display: flex;
   width: 100%;
-  height: 170px;
+  height: 180px;
   padding: 20px;
   border: 1px solid hsl(210deg 4% 26%);
 `
