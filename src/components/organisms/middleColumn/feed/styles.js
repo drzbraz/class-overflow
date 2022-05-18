@@ -29,7 +29,6 @@ export const RightColumn = styled.div`
 export const Gap = styled.div`
   height: 10ṕx;
   width: 100px;
-
   background-color: red;
 `
 export const Badges = styled.div`
@@ -67,15 +66,41 @@ export const Title = styled.p`
   font-size: 1.5rem;
   word-wrap: break-word;
 `
-
+export const PostContent = styled.div`
+display: grid;
+width: 916px;
+height: 120px;
+justify-content: center;
+align-items: center;
+padding: 32px 32px 32px 32px;
+position: fixed;
+top: 50px;
+margin-bottom:100px;
+background-color: hsl(0deg 0% 22%);
+`
 export const PublishPost = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 32px 32px 32px 32px;
-  position: fixed;
-  top: 50px;
-  width: 916px;
-  height: 120px;
-  background-color: hsl(0deg 0% 22%);
+display: flex;
+width: 916px;
+padding: 0px 32px 0px 32px;
+
+
+`
+export const TagContent = styled.div`
+  width: 916px; 
+  font-size: 16px;
+  color: black;
+  top: 350px;
+  --rti-bg: #fff;
+    --rti-main: #3182ce;
+    --rti-radius: 0.375rem;
+    --rti-s: 0.5rem;
+    --rti-tag: #edf2f7;
+    --rti-tag-remove: #e53e3e;
+    align-items: center;
+    bg: var(--rti-bg);
+    border-radius: var(--rti-radius);
+    gap: var(--rti-s);
+    line-height: 1.4;
+    padding: var(--rti-s);
+    background-color: hsl(0deg 0% 22%);
 `

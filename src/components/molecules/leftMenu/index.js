@@ -1,44 +1,21 @@
 import * as Styles from './styles'
-import mock from '../../atoms/mock/disciplinas.json'
 import * as React from 'react'
-import { Paper, MenuItem, MenuList, Checkbox, FormControlLabel, Divider, Typography } from '@mui/material'
+import { TagsInput } from "react-tag-input-component";
+import { useState } from 'react'
 
-export default class LeftMenu extends React.Component {
-  static disciplinas
-  static topic
-  constructor() {
-    super()
-    function handleItemClick(event) {
-      console.log(event.currentTarget.id)
-    }
-    const data = mock.disciplinas
-    this.disciplinas = data.map((r) => (
-      <MenuItem key={r.id} id={r.id} onClick={handleItemClick}>
-        {r.name}
-      </MenuItem>
-    ))
-    this.topic = data
-      .find((element) => (element.id = '001'))
-      .topics.map((item, index) => <FormControlLabel control={<Checkbox />} label={item} key={index} />)
-  }
+export default function LeftMenu() {
 
-  render() {
-    return (
-      <Styles.Container>
-        {/* <Typography style={{ margin: '20px', fontSize: '20px' }} mt={2}>
-          Disciplinas
-        </Typography>
-        <Divider></Divider>
-        <Paper>
-          <MenuList>{this.disciplinas}</MenuList>
-        </Paper>
-        <Typography style={{ margin: '20px', fontSize: '20px' }} mt={2}>
-          Tópicos
-        </Typography>
-        <Divider></Divider>
+  const [selected, setSelected] = useState([]);
 
-        <Paper>{this.topic}</Paper> */}
-      </Styles.Container>
-    )
-  }
+  return (
+    // <Styles.TagContent>
+    //   <TagsInput
+    //     value={selected}
+    //     onChange={setSelected}
+    //     name="Tags"
+    //     placeHolder="Inclua Tags"
+    //   /></Styles.TagContent>
+    <></>
+  )
 }
+
