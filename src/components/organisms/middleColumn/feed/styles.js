@@ -50,7 +50,7 @@ export const Badge = styled.div`
   font-size: 0.9rem;
 `
 export const Content = styled.div`
-  height: 600px;
+  height: 350px;
   width: 100%;
 `
 
@@ -67,40 +67,45 @@ export const Title = styled.p`
   word-wrap: break-word;
 `
 export const PostContent = styled.div`
-display: grid;
-width: 916px;
-height: 120px;
-justify-content: center;
-align-items: center;
-padding: 32px 32px 32px 32px;
-position: fixed;
-top: 50px;
-margin-bottom:100px;
-background-color: hsl(0deg 0% 22%);
+  display: flex;
+  flex-direction: column;
+  width: 916px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 50px;
+  background-color: hsl(0deg 0% 22%);
 `
 export const PublishPost = styled.div`
-display: flex;
-width: 916px;
-padding: 0px 32px 0px 32px;
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 916px;
+  height: 200px;
 `
 export const TagContent = styled.div`
-  width: 916px; 
+  width: 100%;
   font-size: 16px;
   color: black;
   top: 350px;
   --rti-bg: #fff;
-    --rti-main: #3182ce;
-    --rti-radius: 0.375rem;
-    --rti-s: 0.5rem;
-    --rti-tag: #edf2f7;
-    --rti-tag-remove: #e53e3e;
-    align-items: center;
-    bg: var(--rti-bg);
-    border-radius: var(--rti-radius);
-    gap: var(--rti-s);
-    line-height: 1.4;
-    padding: var(--rti-s);
-    background-color: hsl(0deg 0% 22%);
+  --rti-main: #3182ce;
+  --rti-radius: 0.375rem;
+  --rti-s: 0.5rem;
+  --rti-tag: #edf2f7;
+  --rti-tag-remove: #e53e3e;
+  align-items: center;
+  bg: var(--rti-bg);
+  border-radius: var(--rti-radius);
+  gap: var(--rti-s);
+  line-height: 1.4;
+  margin-top: 24px;
+  div {
+    padding: 0;
+  }
+  input {
+    width: 100%;
+    background-color: #f0f0f0;
+  }
 `

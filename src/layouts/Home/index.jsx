@@ -5,7 +5,7 @@ import RightBar from '../../components/organisms/rightBar'
 import LeftBar from '../../components/organisms/leftBar'
 import { useEffect, useState } from 'react'
 const Topics = ['Java', 'JavaScript', 'CSS', 'C++']
-import { getPosts } from '../../infra/api'
+import { getPosts, createPost } from '../../infra/api'
 export default function HomeLayout() {
   const [posts, setPosts] = useState([])
   useEffect(async () => {
@@ -13,12 +13,13 @@ export default function HomeLayout() {
     setPosts(posts)
     console.log('test')
   }, [])
+
   return (
     <Styles.Container>
       <Header />
       <Styles.Content>
         <LeftBar />
-        <MiddleColumn posts={posts} />
+        <MiddleColumn posts={posts} createPost={createPost} />
         <RightBar />
       </Styles.Content>
     </Styles.Container>

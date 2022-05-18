@@ -117,7 +117,8 @@ export const sendComment = async () => {
   return Post
 }
 
-export const createPost = async () => {
+export const createPost = async (postParams) => {
+  console.log('here', postParams)
   const Post = {
     'owner': 'Dbraz',
     'subject': 'POO',
@@ -126,6 +127,6 @@ export const createPost = async () => {
       'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
     'topic': ['Java', 'JavaScript', 'CSS', 'C++']
   }
-  //   return await api.post('/api/v1/posts')
-  return Post
+  return await api.post('/api/v1/posts')
+  // return Post
 }
