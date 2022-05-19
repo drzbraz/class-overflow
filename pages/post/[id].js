@@ -1,5 +1,5 @@
 import PostLayout from '../../src/layouts/Post/index'
 
-export default function Home() {
+export default function Post() {
   return <PostLayout />
 }

@@ -1,19 +1,16 @@
 import * as Styles from './styles'
-import mock from '../../../atoms/mock/post.json'
-import ThumbUpIcon from '@mui/icons-material/ThumbUp'
-import { Style } from '@mui/icons-material'
-import { Input } from '@mui/material'
 import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { TagsInput } from 'react-tag-input-component'
 import { useState } from 'react'
 import Modal from 'react-modal'
-import Boy from '../../../../../public/assets/boy.gif'
-import Image from 'next/image'
 
 export default function Feed({ posts, createPost }) {
-  const [selected, setSelected] = useState([])
+  const [topic, setTopic] = useState([])
+  const [title, setTitle] = useState('')
+  const [content, setContent] = useState('')
   const [modalIsOpen, setIsOpen] = useState(false)
+
   function openModal() {
     setIsOpen(true)
   }
@@ -52,7 +49,6 @@ export default function Feed({ posts, createPost }) {
   return (
     <Styles.Container>
       <Styles.PostContent>
-        {/* <Styles.PublishPost> */}
         <Modal
           isOpen={modalIsOpen}
           onAfterOpen={afterOpenModal}
@@ -69,6 +65,8 @@ export default function Feed({ posts, createPost }) {
             label="Título"
             placeholder="Ex: Estou com problemas na questão 3"
             variant="filled"
+            onChange={(e) => setTitle(e.target.value)}
+            value={title}
           />
           <TextField
             style={{ backgroundColor: 'white', width: '100%', height: 'auto', marginTop: '24px' }}
@@ -78,33 +76,33 @@ export default function Feed({ posts, createPost }) {
             placeholder="Ex: A questão 3 tem uma linguagem de programação que não conheço bem..."
             variant="filled"
             multiline
+            onChange={(e) => setContent(e.target.value)}
+            value={content}
             minRows={7}
           />
           <Styles.TagContent>
             <TagsInput
-              value={selected}
+              value={topic}
               style={{ backgroundColor: 'white', width: '100%' }}
-              onChange={setSelected}
+              onChange={setTopic}
               name="Tags"
               placeHolder="Inclua Tags"
             />
           </Styles.TagContent>
-          <Button variant="contained" style={{ marginTop: '24px', width: '100%' }} onClick={openModal}>
+          <Button
+            variant="contained"
+            style={{ marginTop: '24px', width: '100%' }}
+            onClick={() => createPost({ title, content, topic })}
+          >
             Publicar
           </Button>
         </Modal>
-        <Image src={Boy} alt="" height={250} width={250} />
-        <Button
-          variant="contained"
-          style={{ margin: '12px', height: '48px', position: 'absolute', top: '186px' }}
-          onClick={openModal}
-        >
+        <h1>Feed Questions</h1>
+        <Button variant="contained" style={{ margin: '12px', height: '48px' }} onClick={openModal}>
           Fazer uma pergunta
         </Button>
-        {/* </Styles.PublishPost> */}
       </Styles.PostContent>
 
-      <Styles.Gap></Styles.Gap>
       <Styles.Content>
         {!!posts &&
           posts.length &&

@@ -26,11 +26,7 @@ export const RightColumn = styled.div`
     color: hsl(210deg 11% 89%);
   }
 `
-export const Gap = styled.div`
-  height: 10ṕx;
-  width: 100px;
-  background-color: red;
-`
+
 export const Badges = styled.div`
   display: flex;
   max-width: 500px;
@@ -50,7 +46,7 @@ export const Badge = styled.div`
   font-size: 0.9rem;
 `
 export const Content = styled.div`
-  height: 350px;
+  height: 740px;
   width: 100%;
 `
 
@@ -68,22 +64,16 @@ export const Title = styled.p`
 `
 export const PostContent = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 916px;
+  flex-direction: row;
+  width: 100%;
   height: auto;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  position: fixed;
-  top: 50px;
+  padding: 16px 32px;
   background-color: hsl(0deg 0% 22%);
+  color: white;
 `
-export const PublishPost = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 916px;
-  height: 200px;
-`
+
 export const TagContent = styled.div`
   width: 100%;
   font-size: 16px;

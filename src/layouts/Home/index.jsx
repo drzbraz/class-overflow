@@ -4,14 +4,14 @@ import MiddleColumn from '../../components/organisms/middleColumn/feed'
 import RightBar from '../../components/organisms/rightBar'
 import LeftBar from '../../components/organisms/leftBar'
 import { useEffect, useState } from 'react'
-const Topics = ['Java', 'JavaScript', 'CSS', 'C++']
 import { getPosts, createPost } from '../../infra/api'
 export default function HomeLayout() {
   const [posts, setPosts] = useState([])
   useEffect(async () => {
-    const posts = await getPosts()
+    const token = localStorage.get('token')
+    const posts = await getPosts(token)
+
     setPosts(posts)
-    console.log('test')
   }, [])
 
   return (
@@ -19,7 +19,7 @@ export default function HomeLayout() {
       <Header />
       <Styles.Content>
         <LeftBar />
-        <MiddleColumn posts={posts} createPost={createPost} />
+        <MiddleColumn posts={posts} createPost={createPost()} />
         <RightBar />
       </Styles.Content>
     </Styles.Container>

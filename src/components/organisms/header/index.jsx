@@ -4,9 +4,9 @@ export default function Header() {
   return (
     <Styles.Container>
       <Styles.Text>ClassOverflow</Styles.Text>
-      <Styles.Avatar>
+      {/* <Styles.Avatar>
         <p>D</p>
-      </Styles.Avatar>
+      </Styles.Avatar> */}
     </Styles.Container>
   )
 }

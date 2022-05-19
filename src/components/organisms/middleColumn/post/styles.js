@@ -54,11 +54,24 @@ export const Badge = styled.div`
 `
 export const Content = styled.div`
   padding: 20px 0px;
-  height: 700px;
-  width: 99%;
-  margin-top: 60px;
+  height: 890px;
+  width: 100%;
 `
-
+export const Comments = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 24px;
+  border: 1px solid hsl(210deg 4% 26%);
+  color: var(--theme-light-text);
+  word-wrap: break-word;
+  h3 {
+    padding-left: 24px;
+  }
+  p {
+    padding-left: 24px;
+  }
+`
 export const Post = styled.div`
   display: flex;
   width: 100%;
