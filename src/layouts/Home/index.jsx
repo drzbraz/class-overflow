@@ -8,10 +8,14 @@ import { getPosts, createPost, onAuthenticate } from '../../infra/api'
 export default function HomeLayout() {
   const [posts, setPosts] = useState([])
   useEffect(async () => {
-    const token = await onAuthenticate()
-    localStorage.setItem('token', token)
-    const posts = await getPosts(token)
+    let token = localStorage.getItem('token')
+    if (!token) {
+      token = await onAuthenticate()
+    } else {
+      localStorage.setItem('token', token)
+    }
 
+    const posts = await getPosts(token)
     setPosts(posts)
   }, [])
 
