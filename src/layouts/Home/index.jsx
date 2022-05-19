@@ -11,9 +11,8 @@ export default function HomeLayout() {
     let token = localStorage.getItem('token')
     if (!token) {
       token = await onAuthenticate()
-    } else {
-      localStorage.setItem('token', token)
     }
+    localStorage.setItem('token', token)
 
     const posts = await getPosts(token)
     setPosts(posts)

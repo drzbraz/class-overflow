@@ -8,17 +8,15 @@ export const Container = styled.div`
   width: 100%;
   z-index: 5050;
   background-color: hsl(0deg 0% 22%);
-  height: 50px;
+  height: auto;
   box-shadow: 0px 1px 24px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
 `
-export const Text = styled.h3`
-  font-size: 20px;
-  padding: 0px 32px;
-  cursor: pointer;
-  color: white;
+export const Logo = styled.div`
+  height: auto;
+  padding: 4px 0px;
 `
 export const Avatar = styled.div`
   width: 32px;
