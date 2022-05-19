@@ -7,7 +7,7 @@ export const api = axios.create({
 export const onAuthenticate = async () => {
   try {
     const response = await api.post('/api/v1/auth', { login: 'professor', password: 'professor' })
-    return response.data.token
+    return response.data.token.bearer
   } catch (error) {
     console.log(error)
   }
@@ -75,88 +75,101 @@ export const getPosts = async (token) => {
   // return Posts
 }
 
-export const getPostsByID = async (postId) => {
-  const Post = {
-    id: 1,
-    like: ['1', '2'],
-    liked: true,
-    comments: [
-      {
-        id: 1,
-        owner: 'Dbraz 1',
-        content:
-          'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
-      },
-      {
-        id: 2,
-        owner: 'Dbraz 2',
-        content:
-          'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
-      },
-      {
-        id: 3,
-        owner: 'Dbraz 3',
-        content:
-          'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
-      }
-    ],
-    owner: 'Dbraz',
-    subject: 'POO',
-    title: 'Olá esse é o meu primeiro post no ClassOverFlow.',
-    content:
-      'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
-    topics: ['Java', 'JavaScript', 'CSS', 'C++']
-  }
-  // try {
-  //   const postId = windowLocation.split('/')[2]
-  //   const response = await api.get(`/api/v1/posts/${postId}`)
-  //   return response.data
-  // } catch (error) {
-  //   console.log(error)
-  // }
-  return Post
-}
-
-export const sendLike = async (postId) => {
+export const getPostsByID = async (postParams) => {
   // const Post = {
   //   id: 1,
-  //   action: true || false
+  //   like: ['1', '2'],
+  //   liked: true,
+  //   comments: [
+  //     {
+  //       id: 1,
+  //       owner: 'Dbraz 1',
+  //       content:
+  //         'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
+  //     },
+  //     {
+  //       id: 2,
+  //       owner: 'Dbraz 2',
+  //       content:
+  //         'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
+  //     },
+  //     {
+  //       id: 3,
+  //       owner: 'Dbraz 3',
+  //       content:
+  //         'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow'
+  //     }
+  //   ],
+  //   owner: 'Dbraz',
+  //   subject: 'POO',
+  //   title: 'Olá esse é o meu primeiro post no ClassOverFlow.',
+  //   content:
+  //     'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
+  //   topics: ['Java', 'JavaScript', 'CSS', 'C++']
   // }
   try {
-    const response = await api.post('/api/v1/like')
-    console.log(response.data)
+    // const postId = windowLocation.split('/')[2]
+    const response = await api.get(`/api/v1/posts/${postParams.postID}`, {
+      headers: {
+        'Authorization': postParams.token
+      }
+    })
+    return response.data
   } catch (error) {
     console.log(error)
   }
+  // return Post
 }
 
-export const sendComment = async (comment, postID) => {
-  const Post = {
-    id: postID,
-    comment: comment
-  }
-  console.log(Post)
+export const sendLike = async (token) => {
+  const postId = window.location.pathname.split('/')[2]
+
   try {
-    const response = await api.post('/api/v1/comments', Post)
-    console.log(response.data)
+    const response = await api.post(
+      '/api/v1/likes',
+      { postId },
+      {
+        headers: {
+          'Authorization': token
+        }
+      }
+    )
   } catch (error) {
     console.log(error)
   }
 }
 
-export const createPost = async (token, postParams) => {
-  console.log('here', postParams)
+export const sendComment = async (comment) => {
+  const postId = window.location.pathname.split('/')[2]
+
   const Post = {
-    'owner': 'Dbraz',
-    'subject': 'POO',
-    'title': 'Olá esse é o meu primeiro post no ClassOverFlow.',
-    'content':
-      'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
-    'topic': ['Java', 'JavaScript', 'CSS', 'C++']
+    id: postId,
+    comment: comment.content
   }
+  try {
+    const response = await api.post('/api/v1/comments', Post, {
+      headers: {
+        'Authorization': comment.token
+      }
+    })
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const createPost = async (postParams) => {
+  // const Post = {
+  //   'owner': 'Dbraz',
+  //   'subject': 'POO',
+  //   'title': 'Olá esse é o meu primeiro post no ClassOverFlow.',
+  //   'content':
+  //     'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
+  //   'topic': ['Java', 'JavaScript', 'CSS', 'C++']
+  // }
   return await api.post('/api/v1/posts', postParams, {
     headers: {
-      'Authorization': token
+      'Authorization': postParams.token
     }
   })
   // return Post

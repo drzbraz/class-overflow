@@ -2,14 +2,19 @@ import * as Styles from './styles'
 import { Button } from '@mui/material'
 import TextField from '@mui/material/TextField'
 import { TagsInput } from 'react-tag-input-component'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Modal from 'react-modal'
 
 export default function Feed({ posts, createPost }) {
   const [topic, setTopic] = useState([])
   const [title, setTitle] = useState('')
+  const [token, setToken] = useState('')
   const [content, setContent] = useState('')
   const [modalIsOpen, setIsOpen] = useState(false)
+
+  useEffect(async () => {
+    setToken(localStorage.getItem('token'))
+  }, [])
 
   function openModal() {
     setIsOpen(true)
@@ -92,7 +97,7 @@ export default function Feed({ posts, createPost }) {
           <Button
             variant="contained"
             style={{ marginTop: '24px', width: '100%' }}
-            onClick={() => createPost({ title, content, topic })}
+            onClick={() => createPost({ token, title, content, topic })}
           >
             Publicar
           </Button>

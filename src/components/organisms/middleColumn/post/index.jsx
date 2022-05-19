@@ -5,11 +5,16 @@ import { Button } from '@mui/material'
 import ArrowDropUpIcon from '@mui/icons-material/ArrowDropUp'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import TextField from '@mui/material/TextField'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { SendAndArchiveSharp } from '@mui/icons-material'
 
-export default function Post({ post, postID, sendComment, sendLike }) {
+export default function Post({ post, sendComment, sendLike }) {
   const [content, setContent] = useState('')
+  const [token, setToken] = useState('')
+
+  useEffect(async () => {
+    setToken(localStorage.getItem('token'))
+  }, [])
 
   return (
     <Styles.Container>
@@ -20,12 +25,12 @@ export default function Post({ post, postID, sendComment, sendLike }) {
               <Styles.LeftColumn>
                 <ArrowDropUpIcon
                   style={{ width: '100%', height: '70px', cursor: 'pointer' }}
-                  onClick={() => sendLike()}
+                  onClick={() => sendLike(token)}
                 />
                 {post.like && post.like.length}
                 <ArrowDropDownIcon
                   style={{ width: '100%', height: '70px', cursor: 'pointer' }}
-                  onClick={() => sendLike()}
+                  onClick={() => sendLike(token)}
                 />
               </Styles.LeftColumn>
               <Styles.RightColumn>
@@ -60,7 +65,7 @@ export default function Post({ post, postID, sendComment, sendLike }) {
             <Button
               variant="contained"
               style={{ marginBottom: '48px', width: '20%' }}
-              onClick={() => sendComment({ content, postID })}
+              onClick={() => sendComment({ content, token })}
             >
               Enviar
             </Button>

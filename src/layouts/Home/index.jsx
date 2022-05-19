@@ -4,11 +4,12 @@ import MiddleColumn from '../../components/organisms/middleColumn/feed'
 import RightBar from '../../components/organisms/rightBar'
 import LeftBar from '../../components/organisms/leftBar'
 import { useEffect, useState } from 'react'
-import { getPosts, createPost } from '../../infra/api'
+import { getPosts, createPost, onAuthenticate } from '../../infra/api'
 export default function HomeLayout() {
   const [posts, setPosts] = useState([])
   useEffect(async () => {
-    const token = localStorage.get('token')
+    const token = await onAuthenticate()
+    localStorage.setItem('token', token)
     const posts = await getPosts(token)
 
     setPosts(posts)
@@ -19,7 +20,7 @@ export default function HomeLayout() {
       <Header />
       <Styles.Content>
         <LeftBar />
-        <MiddleColumn posts={posts} createPost={createPost()} />
+        <MiddleColumn posts={posts} createPost={createPost} />
         <RightBar />
       </Styles.Content>
     </Styles.Container>
