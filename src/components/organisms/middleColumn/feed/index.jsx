@@ -122,7 +122,7 @@ export default function Feed({ posts, createPost }) {
           <Button
             variant="contained"
             style={{ marginTop: '24px', width: '100%' }}
-            onClick={() => publishNewPost({ token, title, content, topic, createdAt: new Date() })}
+            onClick={() => publishNewPost({ token, title, content, topic, createdAt: new Date.now() })}
           >
             Publicar
           </Button>
