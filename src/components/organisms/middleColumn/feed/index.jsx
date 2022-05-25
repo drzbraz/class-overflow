@@ -122,7 +122,7 @@ export default function Feed({ posts, createPost }) {
           <Button
             variant="contained"
             style={{ marginTop: '24px', width: '100%' }}
-            onClick={() => publishNewPost({ token, title, content, topic, createdAt: new Date.now() })}
+            onClick={() => publishNewPost({ token, title, content, topic })}
           >
             Publicar
           </Button>
@@ -145,7 +145,7 @@ export default function Feed({ posts, createPost }) {
                 {post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
               </Styles.Badges>
               <h3>{post.ownerName}</h3>
-              <p className="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
+              <p className="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '25/05/2022'}</p>
             </Styles.RightColumn>
           </Styles.FeedPost>
         ))}
