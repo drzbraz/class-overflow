@@ -6,7 +6,7 @@ export default function Header() {
     <Styles.Container>
       <Styles.Logo>
         <a href="/">
-          <Image src={logo} width={280} height={90} />
+          <Image src={logo} width={250} height={90} />
         </a>
       </Styles.Logo>
       {/* <Styles.Avatar>
