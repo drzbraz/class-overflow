@@ -61,7 +61,6 @@ export const getPosts = async (token) => {
   //     topics: ['Java', 'JavaScript', 'CSS', 'C++']
   //   }
   // ]
-  console.log({ token })
   try {
     const response = await api.get('/api/v1/posts', {
       headers: {
@@ -124,8 +123,6 @@ export const getPostsByID = async (postParams) => {
 
 export const sendLike = async ({ postId, commentId, action, token }) => {
   try {
-    console.log('to no like', postId, commentId)
-
     const response = await api.put(
       `/api/v1/posts/${postId}/comments/like`,
       { id: commentId, action },
@@ -170,10 +167,15 @@ export const createPost = async (postParams) => {
   //     'Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlowMeu primeiro post comentando no classOverFlow.Meu primeiro post comentando no classOverFlow',
   //   'topic': ['Java', 'JavaScript', 'CSS', 'C++']
   // }
-  return await api.post('/api/v1/posts', postParams, {
-    headers: {
-      'Authorization': postParams.token
-    }
-  })
+  try {
+    const response = await api.post('/api/v1/posts', postParams, {
+      headers: {
+        'Authorization': postParams.token
+      }
+    })
+    return response.data._id
+  } catch (error) {
+    console.log(error)
+  }
   // return Post
 }

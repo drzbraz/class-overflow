@@ -28,12 +28,13 @@ export default function Post({ post, sendComment, sendLike }) {
   function postNewComment(newComment) {
     const userInfo = jwt_decode(token)
     const comment = {
-      newComment,
-      ownerEmail: userInfo.email
+      content: newComment.comment,
+      ownerName: userInfo.email
     }
 
     setComments([...comments, comment])
     sendComment(newComment)
+    setContent('')
   }
 
   function postNewLike(newLike) {
@@ -106,7 +107,7 @@ export default function Post({ post, sendComment, sendLike }) {
                       }
                       disabled={true}
                     />
-                    {comment.likes && comment.likes.length}
+                    {comment.likes ? comment.likes.length : 0}
                     <ArrowDropDownIcon
                       style={{ width: '100%', height: '70px', cursor: `${shouldSendLike ? 'pointer' : 'not-allowed'}` }}
                       onClick={() =>

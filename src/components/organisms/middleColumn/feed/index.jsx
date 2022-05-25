@@ -28,7 +28,7 @@ export default function Feed({ posts, createPost }) {
   }
   const customStyles = {
     content: {
-      top: '36%',
+      top: '50%',
       left: '50%',
       right: 'auto',
       bottom: 'auto',
@@ -51,17 +51,18 @@ export default function Feed({ posts, createPost }) {
     }
   }
 
-  function publishNewPost(newPost) {
+  async function publishNewPost(newPost) {
     const userInfo = jwt_decode(token)
     const post = {
       ...newPost,
-      // owner: userInfo.ownerName,
-      owner: 'Dbraz',
+      ownerName: userInfo.ownerEmail,
+      // owner: 'Dbraz',
       comments: [],
       subject: ''
     }
-    setPostsFeed([...postsFeed, post])
-    createPost(newPost)
+    const response = await createPost(newPost)
+    post._id = response
+    setPostsFeed([post, ...postsFeed])
     closeModal()
     setTitle('')
     setContent('')
@@ -144,6 +145,7 @@ export default function Feed({ posts, createPost }) {
                 {post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
               </Styles.Badges>
               <h3>{post.ownerName}</h3>
+              <p class="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
             </Styles.RightColumn>
           </Styles.FeedPost>
         ))}
