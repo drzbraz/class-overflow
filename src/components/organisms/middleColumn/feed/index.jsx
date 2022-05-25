@@ -145,7 +145,7 @@ export default function Feed({ posts, createPost }) {
                 {post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
               </Styles.Badges>
               <h3>{post.ownerName}</h3>
-              <p class="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
+              <p className="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
             </Styles.RightColumn>
           </Styles.FeedPost>
         ))}

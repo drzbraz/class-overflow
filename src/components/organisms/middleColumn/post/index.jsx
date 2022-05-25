@@ -22,7 +22,7 @@ export default function Post({ post, sendComment, sendLike }) {
   useEffect(() => {
     if (!post.comments) return
     setComments(post.comments)
-  }, [post.comments])
+  }, [post?.comments])
 
   function postNewComment(newComment) {
     const userInfo = jwt_decode(token)
@@ -67,7 +67,7 @@ export default function Post({ post, sendComment, sendLike }) {
                   {!!post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
                 </Styles.Badges>
                 <h3>{post.owner}</h3>
-                <p class="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
+                <p className="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
               </Styles.RightColumn>
             </Styles.Post>
             {comments.map((comment, index) => {
