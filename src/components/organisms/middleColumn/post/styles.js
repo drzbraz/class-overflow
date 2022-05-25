@@ -48,7 +48,7 @@ export const Text = styled.div`
 `
 
 export const Badge = styled.div`
-  padding: 20px;
+  padding: 14px;
   height: 40px;
   background-color: hsl(205deg 14% 28%);
   border-radius: 4px;
