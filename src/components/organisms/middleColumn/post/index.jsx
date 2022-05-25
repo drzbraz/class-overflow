@@ -14,7 +14,6 @@ export default function Post({ post, sendComment, sendLike }) {
   const [content, setContent] = useState('')
   const [token, setToken] = useState('')
   const [comments, setComments] = useState([])
-  const [shouldSendLike, setShouldSendLike] = useState(false)
 
   useEffect(() => {
     setToken(localStorage.getItem('token'))
@@ -23,12 +22,13 @@ export default function Post({ post, sendComment, sendLike }) {
   useEffect(() => {
     if (!post.comments) return
     setComments(post.comments)
-  }, [post])
+  }, [post.comments])
 
   function postNewComment(newComment) {
     const userInfo = jwt_decode(token)
     const comment = {
       content: newComment.comment,
+      likes: [],
       ownerName: userInfo.email
     }
 
@@ -38,36 +38,19 @@ export default function Post({ post, sendComment, sendLike }) {
   }
 
   function postNewLike(newLike) {
-    console.log(newLike.shouldSend)
-    if (!newLike.shouldSend) return
     const userInfo = jwt_decode(token)
     const like = {
       ...newLike,
       owner: userInfo.email
     }
+    let newComment = comments
 
-    const comment = comments.find((item) => item._id === newLike.commentId)
-    comments.splice(comment)
-    // console.log(comment)
-    // comments.forEach((comment) => {
-    //   console.log(comment._id === newLike.commentId)
-    //   if (comment._id === newLike.commentId) {
-    //     console.log(comment)
-    //     comment.likes = []
-    //   }
-    // })
+    const commentIndex = newComment.findIndex((item) => item._id === newLike.commentId)
+    newLike.action
+      ? newComment[commentIndex].likes.push({ isLiked: true, ownerEmail: like.email })
+      : newComment[commentIndex].likes.splice(0, 1)
 
-    newLike.action ? comment.likes.push({ isLiked: true, ownerEmail: like.email }) : comment.likes.splice(0, 1)
-
-    comments.push(comment)
-
-    // console.log(comment)
-    // console.log(comments)
-    // setComments([...comments, comment])
-
-    setComments((oldState) => [...comments])
-    console.log(comments[0].likes.length)
-    setShouldSendLike(!shouldSendLike)
+    setComments((oldState) => [...newComment])
     sendLike(newLike)
   }
 
@@ -84,6 +67,7 @@ export default function Post({ post, sendComment, sendLike }) {
                   {!!post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
                 </Styles.Badges>
                 <h3>{post.owner}</h3>
+                <p class="date">{post.createdAt ? new Date(post.createdAt).toLocaleDateString() : '--/--/----'}</p>
               </Styles.RightColumn>
             </Styles.Post>
             {comments.map((comment, index) => {
@@ -94,29 +78,31 @@ export default function Post({ post, sendComment, sendLike }) {
                       style={{
                         width: '100%',
                         height: '70px',
-                        cursor: `${!shouldSendLike ? 'pointer' : 'not-allowed'}`
+                        cursor: 'pointer'
                       }}
                       onClick={() =>
                         postNewLike({
                           postId: post._id,
                           commentId: comment._id,
                           action: true,
-                          token,
-                          shouldSend: !shouldSendLike === true
+                          token
                         })
                       }
                       disabled={true}
                     />
                     {comment.likes ? comment.likes.length : 0}
                     <ArrowDropDownIcon
-                      style={{ width: '100%', height: '70px', cursor: `${shouldSendLike ? 'pointer' : 'not-allowed'}` }}
+                      style={{
+                        width: '100%',
+                        height: '70px',
+                        cursor: 'pointer'
+                      }}
                       onClick={() =>
                         postNewLike({
                           postId: post._id,
                           commentId: comment._id,
                           action: false,
-                          token,
-                          shouldSend: shouldSendLike === true
+                          token
                         })
                       }
                     />

@@ -26,6 +26,11 @@ export const RightColumn = styled.div`
   h3 {
     color: hsl(210deg 11% 89%);
   }
+  .date {
+    font-weight: bold;
+    color: hsl(210deg 11% 89%);
+    font-size: 1rem;
+  }
 `
 export const Badges = styled.div`
   display: flex;
@@ -43,8 +48,7 @@ export const Text = styled.div`
 `
 
 export const Badge = styled.div`
-  max-width: 100px;
-  min-width: 40px;
+  padding: 20px;
   height: 40px;
   background-color: hsl(205deg 14% 28%);
   border-radius: 4px;
