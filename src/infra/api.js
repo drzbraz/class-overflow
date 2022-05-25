@@ -132,14 +132,12 @@ export const sendLike = async ({ postId, commentId, action, token }) => {
         }
       }
     )
-    console.log(response.data)
   } catch (error) {
     console.log(error)
   }
 }
 
 export const sendComment = async (newComment) => {
-  console.log(newComment)
   const postId = window.location.pathname.split('/')[2]
 
   try {

@@ -8,9 +8,7 @@ export default class LeftMenu extends React.Component {
   static topic
   constructor() {
     super()
-    function handleItemClick(event) {
-      console.log(event.currentTarget.id)
-    }
+    function handleItemClick(event) {}
     const data = mock.disciplinas
     this.disciplinas = data.map((r) => (
       <MenuItem key={r.id} id={r.id} onClick={handleItemClick}>
