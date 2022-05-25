@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'http://localhost:3001'
+  baseURL: 'https://puc-garden-backend.herokuapp.com/'
+  // baseURL: 'http://localhost:3001/'
 })
 
 export const onAuthenticate = async () => {
@@ -121,37 +122,39 @@ export const getPostsByID = async (postParams) => {
   // return Post
 }
 
-export const sendLike = async (token) => {
-  const postId = window.location.pathname.split('/')[2]
-
+export const sendLike = async ({ postId, commentId, action, token }) => {
   try {
-    const response = await api.post(
-      '/api/v1/likes',
-      { postId },
+    console.log('to no like', postId, commentId)
+
+    const response = await api.put(
+      `/api/v1/posts/${postId}/comments/like`,
+      { id: commentId, action },
       {
         headers: {
           'Authorization': token
         }
       }
     )
+    console.log(response.data)
   } catch (error) {
     console.log(error)
   }
 }
 
-export const sendComment = async (comment) => {
+export const sendComment = async (newComment) => {
+  console.log(newComment)
   const postId = window.location.pathname.split('/')[2]
 
-  const Post = {
-    id: postId,
-    comment: comment.content
-  }
   try {
-    const response = await api.post('/api/v1/comments', Post, {
-      headers: {
-        'Authorization': comment.token
+    const response = await api.post(
+      `/api/v1/posts/${postId}/comments`,
+      { newComment: newComment.comment },
+      {
+        headers: {
+          'Authorization': newComment.token
+        }
       }
-    })
+    )
     return response.data
   } catch (error) {
     console.log(error)

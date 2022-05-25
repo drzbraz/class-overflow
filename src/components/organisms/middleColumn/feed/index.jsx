@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField'
 import { TagsInput } from 'react-tag-input-component'
 import { useState, useEffect } from 'react'
 import Modal from 'react-modal'
+import jwt_decode from 'jwt-decode'
 
 export default function Feed({ posts, createPost }) {
   const [topic, setTopic] = useState([])
@@ -11,10 +12,16 @@ export default function Feed({ posts, createPost }) {
   const [token, setToken] = useState('')
   const [content, setContent] = useState('')
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [postsFeed, setPostsFeed] = useState([])
 
   useEffect(async () => {
     setToken(localStorage.getItem('token'))
   }, [])
+
+  useEffect(() => {
+    if (!posts) return
+    setPostsFeed(posts)
+  }, [posts])
 
   function openModal() {
     setIsOpen(true)
@@ -42,6 +49,23 @@ export default function Feed({ posts, createPost }) {
     overlay: {
       background: 'rgb(37 37 37 / 67%)'
     }
+  }
+
+  function publishNewPost(newPost) {
+    const userInfo = jwt_decode(token)
+    const post = {
+      ...newPost,
+      // owner: userInfo.ownerName,
+      owner: 'Dbraz',
+      comments: [],
+      subject: ''
+    }
+    setPostsFeed([...postsFeed, post])
+    createPost(newPost)
+    closeModal()
+    setTitle('')
+    setContent('')
+    setTopic([])
   }
 
   function afterOpenModal() {
@@ -97,7 +121,7 @@ export default function Feed({ posts, createPost }) {
           <Button
             variant="contained"
             style={{ marginTop: '24px', width: '100%' }}
-            onClick={() => createPost({ token, title, content, topic })}
+            onClick={() => publishNewPost({ token, title, content, topic })}
           >
             Publicar
           </Button>
@@ -109,26 +133,20 @@ export default function Feed({ posts, createPost }) {
       </Styles.PostContent>
 
       <Styles.Content>
-        {!!posts &&
-          posts.length &&
-          posts.map((post) => (
-            <Styles.FeedPost key={post._id}>
-              <Styles.LeftColumn>
-                {post.like.length} likes <br /> {post.comments.length} comments
-              </Styles.LeftColumn>
-              <Styles.RightColumn>
-                <Styles.Title>
-                  <a href={`/post/${post._id}`}>{post.title}</a>
-                </Styles.Title>
-                <Styles.Badges>
-                  {post.topic.map((topic, index) => (
-                    <Styles.Badge key={index}>{topic}</Styles.Badge>
-                  ))}
-                </Styles.Badges>
-                <h3>{post.owner}</h3>
-              </Styles.RightColumn>
-            </Styles.FeedPost>
-          ))}
+        {postsFeed.map((post) => (
+          <Styles.FeedPost key={post._id}>
+            <Styles.LeftColumn>{post.comments ? post.comments.length : 0} comentários</Styles.LeftColumn>
+            <Styles.RightColumn>
+              <Styles.Title>
+                <a href={`/post/${post._id}`}>{post.title}</a>
+              </Styles.Title>
+              <Styles.Badges>
+                {post.topic && post.topic.map((topic, index) => <Styles.Badge key={index}>{topic}</Styles.Badge>)}
+              </Styles.Badges>
+              <h3>{post.ownerName}</h3>
+            </Styles.RightColumn>
+          </Styles.FeedPost>
+        ))}
       </Styles.Content>
     </Styles.Container>
   )

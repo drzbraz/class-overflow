@@ -16,9 +16,10 @@ export const LeftColumn = styled.div`
   justify-content: center;
   align-items: center;
   color: var(--theme-dark-text);
-  font-size: 2rem;
+  font-size: 1.5rem;
 `
 export const RightColumn = styled.div`
+  padding-left: 24px;
   width: 100%;
   height: auto;
   color: hsl(206deg 100% 60%);
@@ -28,7 +29,7 @@ export const RightColumn = styled.div`
 `
 export const Badges = styled.div`
   display: flex;
-  max-width: 500px;
+  max-width: 300px;
   height: auto;
   justify-content: space-between;
 `
@@ -42,11 +43,13 @@ export const Text = styled.div`
 `
 
 export const Badge = styled.div`
-  width: 80px;
-  height: 20px;
+  max-width: 100px;
+  min-width: 40px;
+  height: 40px;
   background-color: hsl(205deg 14% 28%);
   border-radius: 4px;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   color: hsl(205deg 47% 74%);
@@ -56,6 +59,16 @@ export const Content = styled.div`
   padding: 20px 0px;
   height: 890px;
   width: 100%;
+`
+
+export const Like = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  p {
+    padding-right: 24px;
+  }
 `
 export const Comments = styled.div`
   display: flex;

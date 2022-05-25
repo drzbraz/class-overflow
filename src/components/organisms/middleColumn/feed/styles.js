@@ -29,17 +29,19 @@ export const RightColumn = styled.div`
 
 export const Badges = styled.div`
   display: flex;
-  max-width: 500px;
+  max-width: 300px;
   height: auto;
   justify-content: space-between;
 `
 
 export const Badge = styled.div`
-  width: 80px;
-  height: 20px;
+  max-width: 100px;
+  min-width: 40px;
+  height: 40px;
   background-color: hsl(205deg 14% 28%);
   border-radius: 4px;
   display: flex;
+  text-align: center;
   justify-content: center;
   align-items: center;
   color: hsl(205deg 47% 74%);
@@ -53,7 +55,7 @@ export const Content = styled.div`
 export const FeedPost = styled.div`
   display: flex;
   width: 100%;
-  height: 180px;
+  height: 240px;
   padding: 20px;
   border: 1px solid hsl(210deg 4% 26%);
 `
